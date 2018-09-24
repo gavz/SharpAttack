@@ -1,0 +1,3 @@
+[submodule "SharpSploit"]
+	path = SharpSploit
+	url = https://github.com/cobbr/SharpSploit
