@@ -10,7 +10,7 @@ namespace SharpAttack
 {
   class SharpAttack
   {
-    public static Dictionary<string, Command> AvailableCommands = new Dictionary<string, Command>();
+    public static Dictionary<string, Command> AvailableCommands = new Dictionary<string, Command>(StringComparer.OrdinalIgnoreCase);
 
     
 
@@ -18,7 +18,11 @@ namespace SharpAttack
     {
       // Register Commands. Probably a better way to do this.
       new FindLocalAdmin().Initialize();
-      
+      new GetLoggedOnUsers().Initialize();
+      new PowerShell().Initialize();
+      new WmiExec().Initialize();
+
+      Printing.StartUp();
 
       // Start Processing
       if (args.Length > 0)
@@ -27,7 +31,6 @@ namespace SharpAttack
       }
       else
       {
-        Printing.StartUp();
         while (true)
         {
           Printing.Prompt();

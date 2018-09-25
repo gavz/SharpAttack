@@ -29,6 +29,29 @@ namespace SharpAttack.Utils
       Console.ForegroundColor = originalColor;
     }
 
+    public static void CmdOutput(string message)
+    {
+      Console.WriteLine();
+      Console.WriteLine($"{message}");
+    }
+
+    public static void CmdOutputHeading(string message)
+    {
+      ConsoleColor originalColor = Console.BackgroundColor;
+      Console.BackgroundColor = ConsoleColor.DarkBlue;
+      Console.WriteLine($"=== {message} ===");
+      Console.BackgroundColor = originalColor;
+    }
+
+    public static void CmdOutputItem(string message)
+    {
+      ConsoleColor originalFgColor = Console.ForegroundColor;
+      Console.ForegroundColor = ConsoleColor.Blue;
+      Console.Write(" * ");
+      Console.ForegroundColor = originalFgColor;
+      Console.WriteLine($"{message}");
+    }
+
     public static void Prompt()
     {
       Console.WriteLine();
@@ -38,9 +61,9 @@ namespace SharpAttack.Utils
     public static void StartUp()
     {
       Console.WriteLine(@"
-SharpAttack v0.0.1
+SharpAttack v0.0.1 
+Super Special WAAD Edition
 https://www.github.com/jaredhaight/SharpAttack
-
 ");
     }
   }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +13,14 @@ namespace SharpAttack.Commands
   public class FindLocalAdmin : Command
   {
 
-    public override string Run()
+    public override void Run()
     {
-      string result = "";
-      List<string> targets = new List<string>();
-      if (this.Parameters.TryGetValue("ComputerName", out Parameter computernames))
-      {
-        targets.AddRange(computernames.Value);
-      }
-      if (this.Parameters.TryGetValue("IPAddress", out Parameter ipaddresses))
-      {
-        targets.AddRange(ipaddresses.Value);
-      }
+      List<string> targets = Proccessing.GetTargets(this.Parameters);
 
       if (targets.Count > 0)
       {
 
-        SharpSploitResultList<Network.PortScanResult> scan = Network.PortScan(targets, 445, false);
+        SharpSploitResultList<Network.PortScanResult> scan = Network.PortScan(targets, 445, true);
         foreach (Network.PortScanResult scanResult in scan)
         {
           if (scanResult.IsOpen)
@@ -51,9 +43,8 @@ namespace SharpAttack.Commands
       }
       else
       {
-        result = "Need to specify a ComputerName or IPAddress";
+        Printing.Error("Need to specify a ComputerName or IPAddress");
       }
-      return result;
     }
 
     public void Initialize()

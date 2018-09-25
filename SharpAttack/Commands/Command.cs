@@ -26,11 +26,11 @@ namespace SharpAttack.Commands
     public string Url { get; set; }
     public string Helptext { get; set; }
     public Dictionary<String, Parameter> Parameters { get; set; }
-    public abstract string Run();
+    public abstract void Run();
 
     public Command()
     {
-      this.Parameters = new Dictionary<string, Parameter>();
+      this.Parameters = new Dictionary<string, Parameter>(StringComparer.OrdinalIgnoreCase);
     }
 
     public void Register(string name)

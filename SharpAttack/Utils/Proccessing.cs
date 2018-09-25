@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Linq;
 using System.Text;
 using SharpAttack.Utils;
@@ -73,30 +74,63 @@ namespace SharpAttack.Utils
           // add parameter name and value to dict
           paramDictionary.Add(parameterName, parameterValue);        
         }
+        SharpAttack.AvailableCommands[command].Parameters = paramDictionary;
+        SharpAttack.AvailableCommands[command].Run();
 
-        try
+        //try
+        //{
+        //  SharpAttack.AvailableCommands[command].Parameters = paramDictionary;
+        //  SharpAttack.AvailableCommands[command].Run();
+        //}
+        //catch
+        //{
+        //  string errorText = $"Could not run {command}.";
+        //  if (paramDictionary.Count > 0)
+        //  {
+        //    errorText += " Tried with the following params:\n";
+        //    foreach (KeyValuePair<string, Parameter> kvp in paramDictionary)
+        //    {
+        //      errorText += $"{kvp.Key}: {kvp.Value.Value}\n";
+        //    }
+        //  }
+        //  else
+        //  {
+        //    errorText += " (no parameters provided)";
+        //  }
+        //  Printing.Error(errorText);
+        //}
+      }
+    }
+
+    public static List<string> GetTargets(Dictionary<string, Parameter> parameters)
+    {
+      List<string> targets = new List<string>();
+      if (parameters.TryGetValue("ComputerName", out Parameter computernames))
+      {
+        foreach (string computer in computernames.Value)
         {
-          SharpAttack.AvailableCommands[command].Parameters = paramDictionary;
-          SharpAttack.AvailableCommands[command].Run();
-        }
-        catch
-        {
-          string errorText = $"Could not run {command}.";
-          if (paramDictionary.Count > 0)
+          try
           {
-            errorText += " Tried with the following params:\n";
-            foreach (KeyValuePair<string, Parameter> kvp in paramDictionary)
-            {
-              errorText += $"{kvp.Key}: {kvp.Value.Value}\n";
-            }
+            Printing.Informational($"Trying to resolve name: {computer}");
+            Dns.GetHostEntry(computer);
+            targets.Add(computer);
           }
-          else
+          catch
           {
-            errorText += " (no parameters provided)";
+            Printing.Error($"Could not resolve name: {computer}");
           }
-          Printing.Error(errorText);
         }
       }
+      if (parameters.TryGetValue("IPAddress", out Parameter ipaddresses))
+      {
+        targets.AddRange(ipaddresses.Value);
+      }
+
+      if (targets.Count == 0)
+      {
+        Printing.Error("You need to use either the ComputerName or IPAddress parameter with this command");
+      }
+      return targets;
     }
   } 
 }
