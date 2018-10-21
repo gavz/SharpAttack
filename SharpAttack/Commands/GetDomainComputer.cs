@@ -23,7 +23,17 @@ namespace SharpAttack.Commands
 
       foreach (Domain.DomainObject computer in domainComputers)
       {
-        Printing.CmdOutput(computer.ToString());
+        Printing.TableHeader("Property", "Value");
+        Printing.TableItem("Name", computer.name);
+        Printing.TableItem("DistinguishedName", computer.distinguishedname);
+        if (computer.serviceprincipalname.Length > 0)
+        {
+          string[] SPNs = computer.serviceprincipalname.Split(' ');
+          foreach (string spn in SPNs)
+          {
+            Printing.TableItem("Service Principal Name", spn.TrimEnd(','));
+          }
+        }
       }
     }
 

@@ -14,10 +14,15 @@ namespace SharpAttack.Commands
       List<string> targets = Proccessing.GetTargets(RunParams);
       if (targets.Count > 0)
       {
-        foreach (string computer in targets)
+        foreach (string target in targets)
         {
+          string computer = target;
           try
           {
+            if (computer == null)
+            {
+              computer = "localhost";
+            }
             List<string> printedUsers = new List<string>();
             List<Net.LoggedOnUser> users = Net.GetNetLoggedOnUsers(computer);
             Printing.CmdOutputHeading($"Logged on users for {computer}");

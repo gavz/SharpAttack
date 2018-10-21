@@ -16,7 +16,7 @@ namespace SharpAttack.Commands
 
     public WhoAmI()
     {
-      Name = "whoami";
+      Name = "WhoAmI";
       Helptext = "Answers some really deep questions";
       Register();
     }

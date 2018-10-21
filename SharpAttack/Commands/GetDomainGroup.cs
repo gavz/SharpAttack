@@ -21,9 +21,23 @@ namespace SharpAttack.Commands
       }
 
       List<Domain.DomainObject> domainGroups = domainSearcher.GetDomainGroups(Groups);
-      foreach (Domain.DomainObject domainGroup in domainGroups)
+      foreach (Domain.DomainObject group in domainGroups)
       {
-        Printing.CmdOutput(domainGroup.ToString());
+        string adminCount;
+
+        if (group.admincount != null)
+        {
+          adminCount = group.admincount;
+        }
+        else
+        {
+          adminCount = "[NOT SET]";
+        }
+        Printing.TableHeader("Property", "Value");
+        Printing.TableItem("SamAccountName", group.samaccountname);
+        Printing.TableItem("Description", group.description);
+        Printing.TableItem("DistinguishedName", group.distinguishedname);
+        Printing.TableItem("AdminCount", adminCount);
       }
     }
 

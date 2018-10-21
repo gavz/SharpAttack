@@ -25,7 +25,7 @@ namespace SharpAttack.Commands
 
     public RevToSelf()
     {
-      Name = "revtoself";
+      Name = "RevToSelf";
       Helptext = "Reverts back to the original token for this process";
       Register();
     }

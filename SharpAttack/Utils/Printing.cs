@@ -96,6 +96,52 @@ namespace SharpAttack.Utils
       Console.WriteLine($"{message}");
     }
 
+    /// <summary>
+    /// Prints out a table header with no heading
+    /// </summary>
+    public static void TableHeader(string key, string value, int gap = 30)
+    {
+      int keyLength = key.Length;
+      int valueLength = value.Length;
+      string keyLine = new string('-', keyLength);
+      string valueLine = new string('-', valueLength);
+
+      int offset = gap - key.Length;
+      string offsetString = new string(' ', offset);
+      string header = String.Format(@"
+
+  {0}{1}{2}
+  {3}{4}{5}", key, offsetString, value, keyLine, offsetString, valueLine);
+
+      Console.WriteLine(header);
+    }
+
+
+    /// <summary>
+    /// Prints out a table header with heading
+    /// </summary>
+    public static void TableHeader(string heading, string key, string value, int gap = 30)
+    {
+      int keyLength = key.Length;
+      int valueLength = value.Length;
+      string keyLine = new string('-', keyLength);
+      string valueLine = new string('-', valueLength);
+
+      int offset = gap - key.Length;
+      string offsetString = new string(' ', offset);
+      string header = String.Format(@"
+
+  === {0} ===
+
+  {1}{2}{3}
+  {4}{5}{6}", heading, key, offsetString, value, keyLine, offsetString, valueLine);
+
+      Console.WriteLine(header);
+    }
+
+    /// <summary>
+    /// Prints out a table header with heading and description
+    /// </summary>
     public static void TableHeader(string heading, string description, string key, string value, int gap = 30)
     {
       int keyLength = key.Length;
@@ -107,8 +153,7 @@ namespace SharpAttack.Utils
       string offsetString = new string(' ', offset);
       string header = String.Format(@"
 
-  {0}
-
+  === {0} ===
   {1}
 
   {2}{3}{4}

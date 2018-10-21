@@ -24,7 +24,35 @@ namespace SharpAttack.Commands
       List<Domain.DomainObject> domainUsers = domainSearcher.GetDomainUsers(usernames);
       foreach (Domain.DomainObject user in domainUsers)
       {
-        Printing.CmdOutput(user.ToString());
+        string description;
+        string adminCount;
+        if (user.description != null)
+        {
+          description = user.description;
+        }
+        else
+        {
+          description = "[NO DESCRIPTION]";
+        }
+
+        if (user.admincount != null)
+        {
+          adminCount = user.admincount;
+        }
+        else
+        {
+          adminCount = "[NOT SET]";
+        }
+        Printing.TableHeader("Property", "Value");
+        Printing.TableItem("SamAccountName", user.samaccountname);
+        Printing.TableItem("Description", description);
+        Printing.TableItem("DistinguishedName", user.distinguishedname);
+        Printing.TableItem("AdminCount", adminCount);
+        Printing.TableItem("MemberOf", user.memberof);
+        Printing.TableItem("Password Last Set", user.pwdlastset.ToString());
+        Printing.TableItem("Last Logon", user.lastlogon.ToString());
+        Printing.TableItem("Bad Password Count", user.badpwdcount);
+        Printing.TableItem("Last Bad Password", user.badpasswordtime.ToString());
       }
     }
 
