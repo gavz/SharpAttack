@@ -11,4 +11,4 @@ SharpAttack is distributed as source code. Binaries will not be made available. 
 3. You can use Microsoft's [ILMerge](https://www.microsoft.com/en-us/download/details.aspx?id=17630) to merge SharpSploit.dll with the SharpAttack executable into a single file (`.\ILMerge.exe SharpAttack.exe SharpSploit.dll /out:.\SharpAttackBundle.exe`). Make sure to delete any pdb files before doing this else you'll get errors.
 
 ## Thanks
-SharpAttack is built on top of Cobbr's incredible [SharpSploit Project](https://github.com/cobbr/SharpSploit). SHarpAttack is basically an easy way to interact with SharpSploit.
+SharpAttack is built on top of [Cobbr's](https://twitter.com/cobbr_io) incredible [SharpSploit Project](https://github.com/cobbr/SharpSploit). SharpAttack is basically an easy way to interact with SharpSploit.
