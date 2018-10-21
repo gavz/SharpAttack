@@ -10,11 +10,11 @@ namespace SharpAttack.Commands
 {
   class WmiExec : Command
   {
-    public override void Run()
+    public override void Run(Dictionary<String, Parameter> RunParams)
     {
-      if (this.Parameters.TryGetValue("ComputerName", out Parameter computer))
+      if (RunParams.TryGetValue("ComputerName", out Parameter computer))
       {
-        if (this.Parameters.TryGetValue("Command", out Parameter command))
+        if (RunParams.TryGetValue("Command", out Parameter command))
         {
           foreach (string cmd in command.Value)
           {
@@ -28,11 +28,13 @@ namespace SharpAttack.Commands
       }
     }
 
-    public void Initialize()
+    public WmiExec()
     {
-      this.Parameters.Add("ComputerName", new Parameter("Name of the Computer to execute the command on"));
-      this.Parameters.Add("Command", new Parameter("Command to Run"));
-      this.Register("WmiExec");
+      Name = "WmiExec";
+      Helptext = "Executes a command against a remote machine over WMI";
+      Parameters.Add("ComputerName", new Parameter("Name of the Computer to execute the command on. Accepts a comma seperated list. Required.", 0));
+      Parameters.Add("Command", new Parameter("Command to Run. Required.", 1));
+      Register();
     }
   }
 }

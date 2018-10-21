@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ServiceProcess;
+
 using SharpAttack.Utils;
 using SharpSploit.Generic;
 using SharpSploit.Enumeration;
@@ -13,9 +11,9 @@ namespace SharpAttack.Commands
   public class FindLocalAdmin : Command
   {
 
-    public override void Run()
+    public override void Run(Dictionary<String, Parameter> RunParams)
     {
-      List<string> targets = Proccessing.GetTargets(this.Parameters);
+      List<string> targets = Proccessing.GetTargets(RunParams);
 
       if (targets.Count > 0)
       {
@@ -47,11 +45,13 @@ namespace SharpAttack.Commands
       }
     }
 
-    public void Initialize()
+    public FindLocalAdmin()
     {
-      this.Parameters.Add("ComputerName", new Parameter("List of computers to check"));
-      this.Parameters.Add("IPAddress", new Parameter("IP Address to check"));
-      this.Register("FindLocalAdmin");
+      Name = "FindLocalAdmin";
+      Helptext = "Checks a list of computers to see if the current account has administrative access to the endpoint";
+      Parameters.Add("ComputerName", new Parameter("Computer names to check. Accepts a comma seperated list.", 0));
+      Parameters.Add("IPAddress", new Parameter("IP Address to check. Accepts a comma seperated list."));
+      Register();
     }
   }
 }

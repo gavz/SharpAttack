@@ -16,11 +16,24 @@ namespace SharpAttack
 
     static void Main(string[] args)
     {
-      // Register Commands. Probably a better way to do this.
-      new FindLocalAdmin().Initialize();
-      new GetLoggedOnUsers().Initialize();
-      new PowerShell().Initialize();
-      new WmiExec().Initialize();
+      // Register Commands.
+
+      new Help();
+
+      new DcomExec();
+      new DumpProcess();
+      new FindLocalAdmin();
+      new GetDomainComputer();
+      new GetDomainGroup();
+      new GetDomainUser();
+      new GetLoggedOnUsers();
+      new GetSystem();
+      new ImpersonateProcess();
+      new Kerberoast();
+      new PowerShell();
+      new RevToSelf();
+      new WhoAmI();
+      new WmiExec();
 
       Printing.StartUp();
 

@@ -9,9 +9,9 @@ namespace SharpAttack.Commands
   class PowerShell : Command
   {
 
-    public override void Run()
+    public override void Run(Dictionary<String, Parameter> RunParams)
     {
-      if (this.Parameters.TryGetValue("Command", out Parameter command))
+      if (RunParams.TryGetValue("Command", out Parameter command))
       {
         foreach (string cmd in command.Value)
         {
@@ -24,10 +24,12 @@ namespace SharpAttack.Commands
       }
     }
 
-    public void Initialize()
+    public PowerShell()
     {
-      this.Parameters.Add("Command", new Parameter("Command to Run"));
-      this.Register("PowerShell");
+      Name = "PowerShell";
+      Helptext = "Executes a PowerShell command without powershell.exe and attempts to evade logging.";
+      Parameters.Add("Command", new Parameter("PowerShell command to run. Accepts a comma seperated list. Required.", 0));
+      Register();
     }
   }
 }

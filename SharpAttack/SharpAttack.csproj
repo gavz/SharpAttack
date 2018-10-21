@@ -74,9 +74,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\DcomExec.cs" />
+    <Compile Include="Commands\DumpProcess.cs" />
     <Compile Include="Commands\FindLocalAdmin.cs" />
+    <Compile Include="Commands\GetDomainComputer.cs" />
+    <Compile Include="Commands\GetDomainGroup.cs" />
+    <Compile Include="Commands\Kerberoast.cs" />
+    <Compile Include="Commands\GetDomainUser.cs" />
     <Compile Include="Commands\GetLoggedOnUsers.cs" />
+    <Compile Include="Commands\GetSystem.cs" />
+    <Compile Include="Commands\ImpersonateProcess.cs" />
     <Compile Include="Commands\PowerShell.cs" />
+    <Compile Include="Commands\Help.cs" />
+    <Compile Include="Commands\RevToSelf.cs" />
+    <Compile Include="Commands\WhoAmI.cs" />
     <Compile Include="Commands\WmiExec.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

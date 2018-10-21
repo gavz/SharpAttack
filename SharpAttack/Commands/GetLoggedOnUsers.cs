@@ -9,23 +9,11 @@ namespace SharpAttack.Commands
 {
   class GetLoggedOnUsers : Command
   {
-    public override void Run()
+    public override void Run(Dictionary<String, Parameter> RunParams)
     {
-      List<string> targets = Proccessing.GetTargets(this.Parameters);
-      List<Domain.DomainObject> computers = new List<Domain.DomainObject>();
+      List<string> targets = Proccessing.GetTargets(RunParams);
       if (targets.Count > 0)
       {
-        //try
-        //{
-          //Domain.DomainSearcher searcher = new Domain.DomainSearcher();
-          //Printing.Informational("Getting computer objects from AD");
-          //computers = searcher.GetDomainComputers(targets);
-        //}
-        //catch
-        //{
-        //  Printing.Error("There was an issue getting the comptuers from AD");
-        //}
-
         foreach (string computer in targets)
         {
           try
@@ -49,10 +37,12 @@ namespace SharpAttack.Commands
         }
       }
     }
-    public void Initialize()
+    public GetLoggedOnUsers()
     {
-      this.Parameters.Add("ComputerName", new Parameter("List of computers to check"));
-      this.Register("GetLoggedOnUsers");
+      Name = "GetLoggedOnUsers";
+      Helptext = "Returns a list of users logged into a machine";
+      Parameters.Add("ComputerName", new Parameter("List of computers to get logged on users for. Accepts a comma seperated list. Required.", 0));
+      Register();
     }
   }
 }

@@ -9,12 +9,14 @@ namespace SharpAttack.Commands
   public class Parameter
   {
     public string HelpText;
+    public int Position;
     public List<string> Value = new List<string>();
 
     public Parameter() { }
 
-    public Parameter(string HelpText)
+    public Parameter(string HelpText, int Position = -1)
     {
+      this.Position = Position;
       this.HelpText = HelpText;
     }
   }
@@ -26,16 +28,16 @@ namespace SharpAttack.Commands
     public string Url { get; set; }
     public string Helptext { get; set; }
     public Dictionary<String, Parameter> Parameters { get; set; }
-    public abstract void Run();
+    public abstract void Run(Dictionary<String, Parameter> RunParameters);
 
     public Command()
     {
       this.Parameters = new Dictionary<string, Parameter>(StringComparer.OrdinalIgnoreCase);
     }
 
-    public void Register(string name)
+    public void Register()
     {
-      SharpAttack.AvailableCommands.Add(name, this);
+      SharpAttack.AvailableCommands.Add(this.Name, this);
     }
   }
 }
