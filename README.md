@@ -2,6 +2,32 @@
 
 SharpAttack is a console for certain things I use often during security assessments. It leverages .NET and the Windows API to perform its work. It contains commands for domain enumeration, code execution, and other fun things.
 
+## Commands
+```
+=== SharpAttack Commands ===
+Here are the commands available to you
+
+Command                       Description
+-------                       -----------
+Help                          Displays Help
+DcomExec                      Executes a command against a remote machine over WMI
+DumpProcess                   Dumps the memory of a given process
+FindLocalAdmin                Checks a list of computers to see if the current account has administrative
+                              access to the endpoint
+GetDomainComputer             Returns information about a domain computer.
+GetDomainGroup                Returns information about a domain group.
+GetDomainUser                 Returns information about a domain user.
+GetLoggedOnUsers              Returns a list of users logged into a machine
+GetSystem                     Attempts to impersonate NT AUTHORITY\SYSTEM
+ImpersonateProcess            Impresonates the user that owns a given process
+Kerberoast                    Returns a list of SPNs associated with user accounts
+PowerShell                    Executes a PowerShell command without powershell.exe and attempts to evade
+                              logging.
+RevToSelf                     Reverts back to the original token for this process
+WhoAmI                        Answers some really deep questions
+WmiExec                       Executes a command against a remote machine over WMI
+```
+
 ## Building
 
 SharpAttack is distributed as source code. Binaries will not be made available. To build SharpAttack:
