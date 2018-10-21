@@ -10,6 +10,8 @@ namespace SharpAttack.Utils
 {
   class Proccessing
   {
+    // TODO: Need to process arguments with spaces in them. May be as simple as check if first character
+    // is a ", then add everything up until the last character is a ".
     public static void UserInput(string[] input)
     {
       string command = input[0];
