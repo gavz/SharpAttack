@@ -40,5 +40,16 @@ SharpAttack is distributed as source code. Binaries will not be made available. 
     * The only DLL that needs to be bundled with SharpAttack is SharpSploit. Any other DLLs can be ingnored. 
     * Make sure to delete any pdb files before doing this else you'll get errors.
 
+## Using SharpAttack
+SharpAttack can be used as a standalone console or from the command line. To use SharpAttack from the command line, simply run `sharpattack.exe` followed by the command you'd like to run. For example:
+
+```
+.\SharpAttack.exe PowerShell Get-Date
+```
+
+The `help` command lists what commands are available and what they do. You can also run `help <command>` to get help with a specific command and see its parameters.
+
+Where possible, SharpAttack tries to use positional parameters (For example, `powershell get-date` works as well as `powershell -command get-date`). SharpAttack also works with Cobalt Strikes `execute-assembly`, just as it would on the command line.
+
 ## Thanks
 SharpAttack is built on top of [Cobbr's](https://twitter.com/cobbr_io) incredible [SharpSploit Project](https://github.com/cobbr/SharpSploit). SharpAttack is basically an easy way to interact with SharpSploit.
