@@ -10,7 +10,8 @@ Here are the commands available to you
 Command                       Description
 -------                       -----------
 Help                          Displays Help
-DcomExec                      Executes a command against a remote machine over WMI
+Exit                          Quits SharpAttack
+DcomExec                      Executes a command against a remote machine through DCOM objects
 DumpProcess                   Dumps the memory of a given process
 FindLocalAdmin                Checks a list of computers to see if the current account has administrative
                               access to the endpoint
