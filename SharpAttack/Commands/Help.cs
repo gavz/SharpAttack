@@ -21,7 +21,7 @@ namespace SharpAttack.Commands
 
           foreach (KeyValuePair<string, Parameter> parm in cmd.Parameters)
           {
-            Printing.TableItem(parm.Key, parm.Value.HelpText);
+            Printing.TableItem($"-{parm.Key}", parm.Value.HelpText);
           }
         }
         catch

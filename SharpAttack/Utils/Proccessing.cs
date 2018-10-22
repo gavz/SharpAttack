@@ -10,11 +10,48 @@ namespace SharpAttack.Utils
 {
   class Proccessing
   {
-    // TODO: Need to process arguments with spaces in them. May be as simple as check if first character
-    // is a ", then add everything up until the last character is a ".
+
+    /// <summary>
+    /// Intelligently splits command line arguments into an array
+    /// </summary>
+    /// <remarks>
+    /// Taken from: https://stackoverflow.com/a/2132004
+    /// </remarks>
+    public static string[] SplitArguments(string[] commandLine)
+    {
+      var parmChars = String.Join(" ", commandLine).ToCharArray();
+      var inSingleQuote = false;
+      var inDoubleQuote = false;
+      for (var index = 0; index < parmChars.Length; index++)
+      {
+        if (parmChars[index] == '"' && !inSingleQuote)
+        {
+          inDoubleQuote = !inDoubleQuote;
+          parmChars[index] = '\n';
+        }
+        if (parmChars[index] == '\'' && !inDoubleQuote)
+        {
+          inSingleQuote = !inSingleQuote;
+          parmChars[index] = '\n';
+        }
+        if (!inSingleQuote && !inDoubleQuote && parmChars[index] == ' ')
+          parmChars[index] = '\n';
+      }
+      return (new string(parmChars)).Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+    }
+
+    /// <summary>
+    /// Takes user input and tries to split things into parameter names and values. Then run it.
+    /// </summary>
+    /// <remarks>
+    /// Taken from: https://stackoverflow.com/a/2132004
+    /// </remarks>
     public static void UserInput(string[] input)
     {
-      string command = input[0];
+      string[] arguments = SplitArguments(input);
+      List<string> argList = new List<string>();
+
+      string command = arguments[0];
       if (!SharpAttack.AvailableCommands.TryGetValue(command, out Command value))
       {
         Printing.Error($"Could not find command: {command}");
@@ -22,27 +59,27 @@ namespace SharpAttack.Utils
       else
       {
 
-        List<string> arguments;
         Dictionary<string, Parameter> paramDictionary = new Dictionary<string, Parameter>();
 
         try
         {
-          arguments = input.ToList().GetRange(1, input.Length - 1);
+          argList = arguments.ToList().GetRange(1, arguments.Length - 1);
         }
         catch
         {
-          arguments = null;
+          argList = null;
         }
 
-        if (arguments.Count > 0)
+        if (argList.Count > 0)
         {
           string parameterName = null;
           Parameter parameterValue = new Parameter();
 
           int argIndex = 0;
-          foreach (string arg in arguments)
-          {
-            // As we loop through our arguments we need to work to identify
+          string argConcat = "";
+          foreach (string arg in argList)
+          {           
+            // As we loop through our argList we need to work to identify
             // 1. What parameter we're dealing with
             // 2. What the value for the above parameter is
 
@@ -60,6 +97,30 @@ namespace SharpAttack.Utils
               }
               parameterName = arg.TrimStart('-');
             }
+
+            // If argument starts with a quote, we'll begin appending arguments together.
+            if (arg.StartsWith("\""))
+            {
+              argConcat += $"{arg}";
+            }
+
+            if (!String.IsNullOrEmpty(argConcat))
+            {
+              argConcat += $" {arg}";
+            }
+
+            if (argConcat.EndsWith("\""))
+            {
+              parameterValue.Value.Add(argConcat);
+              argConcat = "";
+              break;
+            }
+
+
+
+            
+
+
 
 
             // If the argument does not have a leading dash AND we don't have a parameter name 
