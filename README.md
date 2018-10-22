@@ -47,9 +47,15 @@ SharpAttack can be used as a standalone console or from the command line. To use
 .\SharpAttack.exe PowerShell Get-Date
 ```
 
+If your parameter has spaces in it, wrap it in quotes (example: `SharpAttack.exe powershell "get-date; echo woot"`).
+
+Some parameters accepts lists (mainly the ComputerName and IPAddress params). These should be entered as comma seperated values with no spacing (example: `-ComputerName target1,target2,target3`)
+
 The `help` command lists what commands are available and what they do. You can also run `help <command>` to get help with a specific command and see its parameters.
 
-Where possible, SharpAttack tries to use positional parameters (For example, `powershell get-date` works as well as `powershell -command get-date`). SharpAttack also works with Cobalt Strikes `execute-assembly`, just as it would on the command line.
+Where possible, SharpAttack tries to use positional parameters (For example, `powershell get-date` works as well as `powershell -command get-date`). 
+
+SharpAttack also works with Cobalt Strikes `execute-assembly`, just as it would on the command line. This does require that the SharpSploit library be trimmed down a bit, which I do by removing `Mimikatz.cs` from the SharpSploit project before compiling.
 
 ## Thanks
 SharpAttack is built on top of [Cobbr's](https://twitter.com/cobbr_io) incredible [SharpSploit Project](https://github.com/cobbr/SharpSploit). SharpAttack is basically an easy way to interact with SharpSploit.
