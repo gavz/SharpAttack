@@ -66,7 +66,7 @@ namespace SharpAttack.Commands
     public DcomExec()
     {
       Name = "DcomExec";
-      Helptext = "Executes a command against a remote machine over WMI";
+      Helptext = "Executes a command against a remote machine through DCOM objects";
       Parameters.Add("ComputerName", new Parameter("Name of the Computer to execute the command on. Accepts a comma seperated list. Required.", 0));
       Parameters.Add("Command", new Parameter("Command to Run. Required.", 1));
       Parameters.Add("Parameter", new Parameter("Parameters for command. Enclose in quotes if there are spaces"));
