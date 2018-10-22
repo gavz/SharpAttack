@@ -19,6 +19,7 @@ namespace SharpAttack
       // Register Commands.
 
       new Help();
+      new Exit();
 
       new DcomExec();
       new DumpProcess();

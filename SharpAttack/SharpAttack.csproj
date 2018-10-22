@@ -76,6 +76,7 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\DcomExec.cs" />
     <Compile Include="Commands\DumpProcess.cs" />
+    <Compile Include="Commands\Exit.cs" />
     <Compile Include="Commands\FindLocalAdmin.cs" />
     <Compile Include="Commands\GetDomainComputer.cs" />
     <Compile Include="Commands\GetDomainGroup.cs" />
